@@ -1,0 +1,594 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KINAKU Manualidades</title>
+    <!-- Icono de la pestaña -->
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Inter y Lobster -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lobster&display=swap" rel="stylesheet">
+    <!-- Estilos Personalizados -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Script Personalizado (Contiene la config de Tailwind) -->
+    <script src="assets/js/main.js"></script>
+    <!-- Phosphor Icons (for elegant minimalist icons) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body class="antialiased overflow-x-hidden flex flex-col items-center">
+
+    <!-- Container for max width -->
+    <div class="w-full max-w-[1440px] px-6 md:px-12 lg:px-20">
+
+        <!-- Navigation Bar (Sticky + Efecto Cristal + Menú Móvil) -->
+        <nav class="sticky top-4 z-50 my-4 px-3 sm:px-5 py-2.5 sm:py-3 rounded-full glass-nav flex items-center justify-between transition-all duration-300 relative">
+            
+            <!-- Logo y Título (Con espacio libre en móvil para que se lea completo) -->
+            <a href="#" class="flex items-center gap-2 sm:gap-3 cursor-pointer group text-brand-accent min-w-0 pr-2">
+                <img src="assets/img/logo.png" alt="Logo KINAKU Manualidades" class="logo-img shrink-0 group-hover:scale-105 transition-transform duration-300">
+                <span class="text-[16px] sm:text-2xl font-lobster tracking-wide text-brand-textMain truncate">KINAKU Manualidades</span>
+            </a>
+
+            <!-- Desktop Links (Visible solo en PC) -->
+            <ul class="hidden lg:flex items-center gap-1.5 bg-white/60 p-1.5 rounded-full border border-brand-accent/20 shadow-inner">
+                <li><a href="#" class="nav-pill active">Inicio</a></li>
+                <li><a href="#acerca" class="nav-pill">Acerca de</a></li>
+                <li><a href="#servicios" class="nav-pill">Servicios</a></li>
+                <li><a href="#contacto" class="nav-pill">Contacto</a></li>
+            </ul> 
+
+            <!-- Acciones Derecha -->
+            <div class="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+                
+                <!-- Botón Directo al Catálogo (OCULTO en móvil con 'hidden lg:flex', visible solo en PC) -->
+                <a href="catalogo.html" aria-label="Ver catálogo completo" class="hidden lg:flex catalog-cta-btn h-10 px-4 rounded-full text-white text-sm font-semibold items-center justify-center gap-1.5 transition-all duration-300">
+                    <i class="ph-fill ph-squares-four text-lg"></i>
+                    <span>Ver catálogo</span>
+                </a>
+
+                <!-- Icono WhatsApp Directo (Visible en Móvil y PC) -->
+                <a href="https://wa.me/522471036965?text=Hola!%20Me%20gustaría%20cotizar%20un%20diseño%20tejido." target="_blank" aria-label="Contactar por WhatsApp" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/70 hover:bg-brand-accent flex items-center justify-center text-brand-accent hover:text-white transition-all duration-300 border border-brand-accent/20 shadow-sm nav-wa-btn">
+                    <i class="ph-fill ph-whatsapp-logo text-xl sm:text-2xl"></i>
+                </a>
+
+                <!-- Botón Hamburguesa (Visible solo en Móvil/Tablet) -->
+                <button id="mobileMenuBtn" aria-label="Abrir menú" class="lg:hidden w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/70 hover:bg-white flex items-center justify-center text-brand-textMain hover:text-brand-accent transition-all border border-brand-accent/20 shadow-sm">
+                    <i id="mobileMenuIcon" class="ph ph-list text-xl sm:text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- Menú Desplegable Móvil -->
+            <div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 right-0 mt-3 p-3.5 rounded-3xl glass-nav !bg-[#fff0f2]/95 shadow-2xl border border-brand-accent/30">
+                <ul class="flex flex-col gap-1.5 text-center">
+                    <li><a href="#" class="nav-pill w-full active">Inicio</a></li>
+                    <li><a href="#acerca" class="nav-pill w-full">Acerca de</a></li>
+                    <li><a href="#servicios" class="nav-pill w-full">Servicios</a></li>
+                    <li><a href="#contacto" class="nav-pill w-full">Contacto</a></li>
+                    <li class="pt-2 mt-1 border-t border-brand-accent/15">
+                        <a href="catalogo.html" class="catalog-cta-btn w-full py-2.5 rounded-full text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-md">
+                            <i class="ph-fill ph-squares-four text-lg"></i>
+                            <span>Ver catálogo completo</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN PRINCIPAL (HERO SECTION DINÁMICA)  -->
+        <!-- ========================================== -->
+        <main class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 py-8 lg:py-12 items-center">
+            
+            <!-- Columna Izquierda: Imagen Grande Destacada (Fija con el último modelo) -->
+            <div class="lg:col-span-6 w-full relative group">
+                <div id="featuredCard" class="aspect-[4/5] sm:aspect-square lg:aspect-[4/5] rounded-[2rem] overflow-hidden relative shadow-2xl shadow-brand-accent/20 bg-white/40 cursor-pointer">
+                    
+                    <!-- Imagen Principal Dinámica -->
+                    <img id="featuredImg" src="assets/img/5.jpg" alt="Muñeco Amigurumi Principal" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105">
+                    
+                    <!-- Sombra degradada para que resalte el texto sobre la foto -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent"></div>
+                    
+                    <!-- Etiqueta Superior Derecha (Categoría) -->
+                    <div id="featuredCategory" class="absolute top-6 right-6 bg-brand-accent/90 backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs font-semibold text-white shadow-md">
+                        Amigurumi
+                    </div>
+
+                    <!-- Información del Modelo en Grande (Abajo a la izquierda) -->
+                    <div class="absolute bottom-6 left-6 right-6 flex flex-col items-start gap-2">
+                        <!-- Etiqueta de Estado -->
+                        <div class="bg-white/90 backdrop-blur-md border border-white px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium text-brand-textMain flex items-center gap-2 shadow-lg">
+                            <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
+                            <span id="featuredBadgeText">Nuevo modelo disponible</span>
+                        </div>
+                        
+                        <!-- Nombre y Descripción del modelo en grande -->
+                        <div class="mt-1 text-white drop-shadow">
+                            <h2 id="featuredTitle" class="text-2xl sm:text-3xl font-bold leading-tight">Cargando...</h2>
+                            <p id="featuredDesc" class="text-xs sm:text-sm text-white/90 line-clamp-2 mt-1 max-w-md"></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Textos y Carrusel de Productos Anteriores -->
+            <div class="lg:col-span-6 flex flex-col justify-center">
+                
+                <!-- Título Principal de la Página -->
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.1] mb-8 tracking-tight text-brand-textMain">
+                    Detalles tejidos <br class="hidden xl:block">
+                    <span class="text-brand-accent">que inspiran</span> <br class="hidden xl:block">
+                    tu día a día
+                </h1>
+
+                <!-- Contenedor Dinámico de las Tarjetas Pequeñas (Se inyectan desde JS) -->
+                <div id="cardsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8 min-h-[290px]">
+                    <!-- Aquí JavaScript dibuja automáticamente los productos anteriores -->
+                </div>
+
+                <!-- Barra Inferior: Flechas a la izquierda + Botón Catálogo Completo a la derecha -->
+                <div class="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-brand-accent/15">
+                    
+                    <!-- Flechas del Carrusel -->
+                    <div class="flex items-center gap-3">
+                        <button id="prevCarouselBtn" aria-label="Anterior" class="w-12 h-12 rounded-full border border-brand-accent/30 flex items-center justify-center hover:bg-brand-card transition-colors text-brand-accent bg-white shadow-sm">
+                            <i class="ph ph-arrow-left text-xl"></i>
+                        </button>
+                        <button id="nextCarouselBtn" aria-label="Siguiente" class="w-12 h-12 rounded-full bg-brand-accent text-white flex items-center justify-center hover:bg-brand-accentHover transition-colors shadow-lg shadow-brand-accent/30">
+                            <i class="ph ph-arrow-right text-xl"></i>
+                        </button>
+                        <span class="text-xs text-brand-textMuted hidden sm:inline ml-1">Anteriores</span>
+                    </div>
+
+                    <!-- Botón para ir a la vista de Catálogo Completo (Destacado) -->
+                    <a href="catalogo.html" class="catalog-cta-btn inline-flex items-center gap-2.5 text-white px-7 py-3.5 rounded-full text-sm font-semibold transition-all duration-300 group">
+                        <i class="ph-fill ph-squares-four text-xl transition-transform duration-300 group-hover:rotate-12"></i>
+                        <span>Ver catálogo completo</span>
+                        <i class="ph-bold ph-arrow-right text-sm transition-transform duration-300 group-hover:translate-x-1.5"></i>
+                    </a>
+
+                </div>
+
+            </div>
+        </main>
+
+        <!-- ========================================== -->
+        <!-- VENTANA POP-UP (MODAL DE DETALLE)          -->
+        <!-- ========================================== -->
+        <div id="productModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6 bg-black/50 backdrop-blur-sm">
+            <div class="modal-box glass-card bg-white/95 rounded-[2rem] max-w-2xl w-full overflow-hidden shadow-2xl border border-white relative">
+                
+                <!-- Botón Cerrar (X) -->
+                <button id="closeModalBtn" aria-label="Cerrar ventana" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/90 hover:bg-brand-accent text-brand-textMain hover:text-white flex items-center justify-center transition-colors shadow-md">
+                    <i class="ph-bold ph-x text-lg"></i>
+                </button>
+
+                <div class="grid grid-cols-1 sm:grid-cols-12">
+                    <!-- Imagen del Producto en el Pop-up -->
+                    <div class="sm:col-span-6 bg-brand-dark/60 aspect-square sm:aspect-auto sm:h-full relative overflow-hidden group">
+                        <img id="modalImg" src="" alt="" class="w-full h-full object-cover cursor-zoom-in transition-transform duration-500 group-hover:scale-105">
+                        
+                        <!-- Etiqueta Izquierda: Número de Modelo -->
+                        <span id="modalIdBadge" class="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm text-brand-textMain text-xs font-bold px-3 py-1 rounded-full shadow">
+                            #1
+                        </span>
+
+                        <!-- Botón Derecha: Zoom para ver imagen completa -->
+                        <button id="zoomImgBtn" type="button" aria-label="Ver imagen en tamaño completo" title="Ver tamaño completo" class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-white/90 hover:bg-brand-accent text-brand-textMain hover:text-white backdrop-blur-sm flex items-center justify-center shadow transition-all duration-200 hover:scale-110">
+                            <i class="ph-bold ph-magnifying-glass-plus text-sm"></i>
+                        </button>
+                    </div>
+
+                    <!-- Información del Producto en el Pop-up -->
+                    <div class="sm:col-span-6 p-6 sm:p-8 flex flex-col justify-between">
+                        <div>
+                            <!-- Etiquetas Superiores: Categoría / Subcategoría y Estado (Entregado o Disponible) -->
+                            <div class="flex flex-wrap items-center gap-2 mb-3 pr-8">
+                                <span id="modalCategory" class="inline-block bg-brand-card/70 text-brand-accent text-xs font-semibold px-3 py-1 rounded-full">
+                                    Categoría
+                                </span>
+                                <span id="modalStatusBadge" class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full">
+                                    Estado
+                                </span>
+                            </div>
+
+                            <h3 id="modalTitle" class="text-2xl font-bold text-brand-textMain mb-3 leading-snug">
+                                Nombre del Producto
+                            </h3>
+                            <p id="modalDesc" class="text-sm text-brand-textMuted leading-relaxed mb-6">
+                                Descripción completa del producto seleccionado.
+                            </p>
+                        </div>
+
+                        <!-- Botón para preguntar por este modelo en WhatsApp -->
+                        <div class="pt-4 border-t border-brand-accent/15 flex flex-col gap-2.5">
+                            <a id="modalWaBtn" href="#" target="_blank" class="whatsapp-btn flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl text-white text-sm font-semibold transition-all duration-300 shadow-md">
+                                <i class="ph-fill ph-whatsapp-logo text-xl"></i>
+                                <span id="modalWaBtnText">Me interesa este modelo</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- VISOR DE IMAGEN EN TAMAÑO COMPLETO (ZOOM)  -->
+        <!-- ========================================== -->
+        <div id="imageLightbox" class="fixed inset-0 z-[120] hidden items-center justify-center p-3 sm:p-8 bg-black/85 backdrop-blur-md cursor-zoom-out">
+            <!-- Botón Cerrar Zoom -->
+            <button id="closeLightboxBtn" type="button" aria-label="Cerrar imagen completa" class="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 w-11 h-11 rounded-full bg-white/90 hover:bg-brand-accent text-brand-textMain hover:text-white flex items-center justify-center transition-all shadow-lg">
+                <i class="ph-bold ph-x text-xl"></i>
+            </button>
+
+            <!-- Imagen Completa Sin Recortes -->
+            <img id="lightboxImg" src="" alt="" class="max-w-full max-h-[90vh] w-auto h-auto object-contain rounded-2xl shadow-2xl border-2 border-white/20 modal-box cursor-default">
+        </div>
+        <!-- ========================================== -->
+        <!-- SECCIÓN: ACERCA DE KINAKU MANUALIDADES     -->
+        <!-- ========================================== -->
+        <section id="acerca" class="py-16 lg:py-24 border-t border-brand-accent/10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+                
+                <!-- Columna de Texto -->
+                <div class="lg:col-span-6 order-2 lg:order-1">
+                    <div class="inline-flex items-center gap-2 bg-white/60 border border-brand-accent/20 px-4 py-1.5 rounded-full text-xs font-semibold text-brand-accent mb-4">
+                        <i class="ph-fill ph-sparkle"></i> Nuestra Esencia
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-brand-textMain mb-4">
+                        Acerca de <span class="text-brand-accent">KINAKU Manualidades</span>
+                    </h2>
+                    <div class="section-divider mb-6"></div>
+                    <p class="text-brand-textMuted mb-6 leading-relaxed">
+                        En <strong>KINAKU Manualidades</strong> damos vida a tus ideas a través del arte hecho a mano. Nuestra especialidad son las figuras tejidas 100% a crochet con hilos suaves, acrílico y algodón de calidad, pero nuestra creatividad va mucho más allá: también diseñamos y elaboramos manualidades en general trabajando con <strong>foami, fieltro y manta</strong>, cuidando cada corte, costura y punto para lograr acabados impecables.
+                    </p>
+                    <p class="text-brand-textMuted mb-8 leading-relaxed">
+                        Creemos que los detalles artesanales tienen un valor único. Ya sea un muñeco tejido de tu personaje favorito, creaciones personalizadas en fieltro y manta, o proyectos decorativos y escolares en foami, cada pieza lleva consigo horas de dedicación, paciencia y cariño.
+                    </p>
+
+                    <!-- Mini estadísticas / Valores (Optimizado para móvil) --> 
+                    <div class="grid grid-cols-3 gap-2 sm:gap-4">
+                        <div class="glass-card bg-white/50 px-2 py-3 sm:p-4 rounded-2xl text-center flex flex-col justify-center">
+                            <span class="block text-lg sm:text-3xl font-bold text-brand-accent mb-1">100%</span>
+                            <span class="text-[11px] sm:text-xs text-brand-textMuted font-medium leading-tight">Hecho a mano</span>
+                        </div>
+                        <div class="glass-card bg-white/50 px-2 py-3 sm:p-4 rounded-2xl text-center flex flex-col justify-center">
+                            <span class="block text-lg sm:text-3xl font-bold text-brand-accent mb-1">+50</span>
+                            <span class="text-[11px] sm:text-xs text-brand-textMuted font-medium leading-tight">Diseños tejidos</span>
+                        </div>
+                        <div class="glass-card bg-white/50 px-2 py-3 sm:p-4 rounded-2xl text-center flex flex-col justify-center overflow-hidden">
+                            <span class="block text-base sm:text-2xl lg:text-3xl font-bold text-brand-accent mb-1 truncate">Premium</span>
+                            <span class="text-[11px] sm:text-xs text-brand-textMuted font-medium leading-tight">Estambre suave</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna de Carrusel (4 Imágenes) -->
+                <div class="lg:col-span-6 order-1 lg:order-2">
+                    <div class="glass-card p-4 sm:p-6 rounded-[2rem] relative">
+                        
+                        <!-- Contenedor del Carrusel -->
+                        <div id="aboutCarousel" class="aspect-[4/3] rounded-2xl overflow-hidden relative group bg-brand-dark/40">
+                            
+                            <!-- Imágenes del Carrusel (Cambia las rutas por tus 4 fotos) -->
+                            <img src="assets/img/about.webp" alt="Creaciones KINAKU Manualidades 1" class="about-slide w-full h-full object-cover absolute inset-0 transition-all duration-700 opacity-100 scale-100 z-10">
+                            <img src="assets/img/about2.jpg" alt="Creaciones KINAKU Manualidades 2" class="about-slide w-full h-full object-cover absolute inset-0 transition-all duration-700 opacity-0 scale-105 z-0 pointer-events-none">
+                            <img src="assets/img/about3.jpg" alt="Creaciones KINAKU Manualidades 3" class="about-slide w-full h-full object-cover absolute inset-0 transition-all duration-700 opacity-0 scale-105 z-0 pointer-events-none">
+                            <img src="assets/img/about4.jpg" alt="Creaciones KINAKU Manualidades 4" class="about-slide w-full h-full object-cover absolute inset-0 transition-all duration-700 opacity-0 scale-105 z-0 pointer-events-none">
+
+                            <!-- Degradado inferior sutil para resaltar los indicadores -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent z-20 pointer-events-none"></div>
+
+                            <!-- Flecha Izquierda -->
+                            <button id="aboutPrevBtn" type="button" aria-label="Imagen anterior" class="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/85 hover:bg-brand-accent text-brand-textMain hover:text-white backdrop-blur-sm flex items-center justify-center shadow-md transition-all duration-300 opacity-90 sm:opacity-0 sm:group-hover:opacity-100">
+                                <i class="ph-bold ph-caret-left text-base sm:text-lg"></i>
+                            </button>
+
+                            <!-- Flecha Derecha -->
+                            <button id="aboutNextBtn" type="button" aria-label="Imagen siguiente" class="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/85 hover:bg-brand-accent text-brand-textMain hover:text-white backdrop-blur-sm flex items-center justify-center shadow-md transition-all duration-300 opacity-90 sm:opacity-0 sm:group-hover:opacity-100">
+                                <i class="ph-bold ph-caret-right text-base sm:text-lg"></i>
+                            </button>
+
+                            <!-- Indicadores (4 puntos inferiores) -->
+                            <div class="absolute bottom-3.5 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 bg-black/25 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                                <button type="button" aria-label="Ver foto 1" data-slide="0" class="about-dot w-6 h-2 rounded-full bg-white transition-all duration-300"></button>
+                                <button type="button" aria-label="Ver foto 2" data-slide="1" class="about-dot w-2 h-2 rounded-full bg-white/50 hover:bg-white/80 transition-all duration-300"></button>
+                                <button type="button" aria-label="Ver foto 3" data-slide="2" class="about-dot w-2 h-2 rounded-full bg-white/50 hover:bg-white/80 transition-all duration-300"></button>
+                                <button type="button" aria-label="Ver foto 4" data-slide="3" class="about-dot w-2 h-2 rounded-full bg-white/50 hover:bg-white/80 transition-all duration-300"></button>
+                            </div>
+
+                        </div>
+
+                        <!-- Etiqueta flotante decorativa -->
+                        <div class="mt-4 flex items-center justify-between px-2">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-brand-accent text-white flex items-center justify-center text-xl shrink-0">
+                                    <i class="ph-fill ph-heart"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-brand-textMain">Tejido con dedicación</h4>
+                                    <p class="text-xs text-brand-textMuted">Piezas únicas hechas punto por punto</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-semibold text-brand-accent bg-white px-3 py-1 rounded-full border border-brand-accent/20">Artesanal</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN: SERVICIOS                         -->
+        <!-- ========================================== -->
+        <section id="servicios" class="py-16 lg:py-24 border-t border-brand-accent/10">
+            <div class="mb-12">
+                <h2 class="text-3xl sm:text-4xl font-bold text-brand-textMain mb-3">Nuestros Servicios</h2>
+                <div class="section-divider mb-6"></div>
+                <p class="text-brand-textMuted max-w-2xl">
+                    Creamos piezas tejidas a la medida de tus ideas. Descubre cómo podemos ayudarte a materializar el regalo o recuerdo ideal.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                
+                <!-- Servicio 1 -->
+                <div class="glass-card bg-white/50 p-8 rounded-3xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-brand-accent text-white flex items-center justify-center text-3xl mb-6 shadow-md shadow-brand-accent/20">
+                            <i class="ph ph-magic-wand"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-textMain mb-3">Muñecos a Crochet Personalizados</h3>
+                        <p class="text-sm text-brand-textMuted leading-relaxed mb-6">
+                            ¿Tienes una mascota, una persona especial, un personaje de videojuegos o cualquier personaje en general? Lo diseñamos y tejemos desde cero eligiendo los colores y detalles que más te gusten.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-brand-textMuted space-y-2 border-t border-brand-accent/15 pt-4">
+                        <li class="flex items-center gap-2"><i class="ph-bold ph-check text-brand-accent"></i> Personajes de series y películas</li>
+                        <li class="flex items-center gap-2"><i class="ph-bold ph-check text-brand-accent"></i> Mascotas o animales en general</li>
+                        <li class="flex items-center gap-2"><i class="ph-bold ph-check text-brand-accent"></i> Elección de paleta de colores</li>
+                    </ul>
+                </div>
+
+                <!-- Servicio 2 -->
+                <div class="glass-card p-8 rounded-3xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-brand-accent text-white flex items-center justify-center text-3xl mb-6 shadow-md shadow-brand-accent/20">
+                            <i class="ph ph-scissors"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-textMain mb-3">Creaciones en Foami, Fieltro y Manta</h3>
+                        <p class="text-sm text-brand-textMuted leading-relaxed mb-6">
+                            Elaboramos manualidades, adornos y decoraciones personalizadas para cualquier ocasión. Diseños creativos hechos a mano para darle un toque único a tus eventos y celebraciones especiales.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-brand-textMuted space-y-2 border-t border-brand-accent/15 pt-4">
+                        <li class="flex items-center gap-2"><i class="ph-bold ph-check text-brand-accent"></i> Ideales para fiestas y decoración</li>
+                        <li class="flex items-center gap-2"><i class="ph-bold ph-check text-brand-accent"></i> Diseños totalmente a la medida</li>
+                    </ul>
+                </div>
+
+                <!-- Servicio 3 -->
+                <div class="glass-card bg-white/50 p-8 rounded-3xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-brand-accent text-white flex items-center justify-center text-3xl mb-6 shadow-md shadow-brand-accent/20">
+                            <i class="ph ph-student"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-textMain mb-3">Apoyo en Trabajos Escolares</h3>
+                        <p class="text-sm text-brand-textMuted leading-relaxed mb-6">
+                            Te ayudamos a materializar maquetas, carteles, material didáctico y proyectos escolares en general. Trabajos creativos, limpios y bien elaborados para destacar en clase.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-brand-textMuted space-y-2 border-t border-brand-accent/15 pt-4">
+                        <li class="flex items-center gap-2"><i class="ph-bold ph-check text-brand-accent"></i> Maquetas, carteles y material didáctico</li>
+                        <li class="flex items-center gap-2"><i class="ph-bold ph-check text-brand-accent"></i> Creatividad y puntualidad en la entrega</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN: CONTACTO (Inspirada en tu captura) -->
+        <!-- ========================================== -->
+        <section id="contacto" class="py-16 lg:py-24 border-t border-brand-accent/10">
+            
+            <!-- Encabezado estilo captura -->
+            <div class="mb-10">
+                <h2 class="text-3xl sm:text-4xl font-bold text-brand-textMain mb-3">Contacto</h2>
+                <div class="section-divider mb-5"></div>
+                <p class="text-brand-textMuted max-w-4xl leading-relaxed">
+                    Ya sea para cotizar un diseño personalizado, encargar recuerdos para tu evento o preguntar por disponibilidad en el catálogo, hablemos. Envíame un mensaje y creemos juntos ese detalle tejido ideal.
+                </p>
+            </div>
+
+            <!-- Contenedor de 2 Columnas -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                <!-- Columna Izquierda: Información + Mapa (5 columnas) -->
+                <div class="lg:col-span-5 glass-card bg-white/80 p-6 sm:p-8 rounded-3xl flex flex-col justify-between shadow-lg">
+                    
+                    <!-- Lista de datos -->
+                    <div class="space-y-6 mb-6">
+                        
+                        <!-- Item: Dirección -->
+                        <div class="flex items-start gap-4 contact-info-item">
+                            <div class="contact-icon-circle shrink-0">
+                                <i class="ph ph-map-pin text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-textMain text-base">Dirección</h4>
+                                <p class="text-sm text-brand-textMuted mt-0.5">Huamantla, Tlaxcala, México</p>
+                            </div>
+                        </div>
+
+                        <!-- Item: Llámeme / WhatsApp -->
+                        <div class="flex items-start gap-4 contact-info-item">
+                            <div class="contact-icon-circle shrink-0">
+                                <i class="ph ph-phone text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-textMain text-base">Llámeme</h4>
+                                <p class="text-sm text-brand-textMuted mt-0.5">+52 247-103-6965</p>
+                            </div>
+                        </div>
+
+                        <!-- Item: Correo -->
+                        <div class="flex items-start gap-4 contact-info-item">
+                            <div class="contact-icon-circle shrink-0">
+                                <i class="ph ph-envelope-simple text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-textMain text-base">Envíame un Correo</h4>
+                                <p class="text-sm text-brand-textMuted mt-0.5 break-all">alonsomarlet@gmail.com</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- BOTÓN WHATSAPP -->
+                    <a href="https://wa.me/522471036965?text=Hola!%20Me%20gustaría%20cotizar%20un%20diseño%20tejido." target="_blank" class="whatsapp-btn flex items-center justify-center gap-2 w-full py-3.5 mb-8 rounded-xl text-white font-semibold transition-all duration-300 shadow-md">
+                        <i class="ph-fill ph-whatsapp-logo text-2xl"></i>
+                        <span>Contáctame por WhatsApp</span>
+                    </a>
+
+                    <!-- Mapa de Google (Huamantla, Tlaxcala) -->
+                    <div class="w-full h-72 sm:h-80 flex-grow min-h-[280px] rounded-2xl overflow-hidden border border-brand-accent/20 shadow-inner">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30116.591243726525!2d-97.94044985!3d19.31420375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cffc8467199375%3A0x8e83b5c4d6923f42!2sHuamantla%2C%20Tlax.!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Guía de Pedidos Personalizados (7 columnas) -->
+                <div class="lg:col-span-7 glass-card bg-white/80 p-6 sm:p-10 rounded-3xl shadow-lg flex flex-col justify-between">
+                    
+                    <div>
+                        <!-- Encabezado de la tarjeta -->
+                        <div class="inline-flex items-center gap-2 bg-brand-card/60 border border-brand-accent/20 px-3.5 py-1 rounded-full text-xs font-semibold text-brand-accent mb-3">
+                            <i class="ph-fill ph-magic-wand"></i> Proceso fácil y directo
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-brand-textMain mb-2">
+                            ¿Cómo hacer tu <span class="text-brand-accent">pedido</span>?
+                        </h3>
+                        <p class="text-sm text-brand-textMuted mb-6 leading-relaxed">
+                            Cada pieza se elabora artesanalmente cuidando cada detalle. Sigue estos 4 sencillos pasos para encargar tu diseño:
+                        </p>
+
+                        <!-- Cuadrícula de 4 pasos -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                            
+                            <!-- Paso 1 -->
+                            <div class="bg-white/90 p-4 rounded-2xl border border-brand-accent/15 shadow-sm flex items-start gap-3.5 hover:border-brand-accent/40 transition-colors">
+                                <div class="w-10 h-10 rounded-xl bg-brand-card text-brand-accent font-bold flex items-center justify-center shrink-0 text-lg shadow-inner">
+                                    1
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-brand-textMain mb-1 flex items-center gap-1.5">
+                                        Elige o envía tu idea <i class="ph-bold ph-image text-brand-accent"></i>
+                                    </h4>
+                                    <p class="text-xs text-brand-textMuted leading-relaxed">
+                                        Selecciona un número de modelo del catálogo (ej. <strong>#44</strong>) o envíanos foto del personaje, ramo o manualidad que deseas.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Paso 2 -->
+                            <div class="bg-white/90 p-4 rounded-2xl border border-brand-accent/15 shadow-sm flex items-start gap-3.5 hover:border-brand-accent/40 transition-colors">
+                                <div class="w-10 h-10 rounded-xl bg-brand-card text-brand-accent font-bold flex items-center justify-center shrink-0 text-lg shadow-inner">
+                                    2
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-brand-textMain mb-1 flex items-center gap-1.5">
+                                        Cotiza por WhatsApp <i class="ph-bold ph-chat-circle-dots text-brand-accent"></i>
+                                    </h4>
+                                    <p class="text-xs text-brand-textMuted leading-relaxed">
+                                        Platicamos sobre el tamaño, colores, materiales o cantidad de piezas y te damos tu cotización y fecha de entrega.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Paso 3 -->
+                            <div class="bg-white/90 p-4 rounded-2xl border border-brand-accent/15 shadow-sm flex items-start gap-3.5 hover:border-brand-accent/40 transition-colors">
+                                <div class="w-10 h-10 rounded-xl bg-brand-card text-brand-accent font-bold flex items-center justify-center shrink-0 text-lg shadow-inner">
+                                    3
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-brand-textMain mb-1 flex items-center gap-1.5">
+                                        Elaboración artesanal <i class="ph-bold ph-scissors text-brand-accent"></i>
+                                    </h4>
+                                    <p class="text-xs text-brand-textMuted leading-relaxed">
+                                        Agendamos tu pedido y comenzamos a trabajar a mano punto por punto en tejido, fieltro, foami o manta.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Paso 4 -->
+                            <div class="bg-white/90 p-4 rounded-2xl border border-brand-accent/15 shadow-sm flex items-start gap-3.5 hover:border-brand-accent/40 transition-colors">
+                                <div class="w-10 h-10 rounded-xl bg-brand-card text-brand-accent font-bold flex items-center justify-center shrink-0 text-lg shadow-inner">
+                                    4
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-brand-textMain mb-1 flex items-center gap-1.5">
+                                        Entrega de tu pedido <i class="ph-bold ph-package text-brand-accent"></i>
+                                    </h4>
+                                    <p class="text-xs text-brand-textMuted leading-relaxed">
+                                        Acordamos el punto y horario de entrega en <strong>Huamantla, Tlaxcala</strong> para que recibas tu creación lista.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Nota informativa sobre tiempos y encargos por lote -->
+                        <div class="bg-brand-card/45 border border-brand-accent/20 rounded-2xl p-4 mb-6 flex items-start gap-3">
+                            <i class="ph-fill ph-calendar-check text-brand-accent text-xl shrink-0 mt-0.5"></i>
+                            <div class="text-xs text-brand-textMuted leading-relaxed">
+                                <strong class="text-brand-textMain block mb-0.5">Recomendación para pedidos especiales y recuerdos de eventos:</strong>
+                                Los artículos marcados como <span class="text-emerald-700 font-semibold">Disponibles</span> están listos para entrega inmediata. Para diseños personalizados o lotes de recuerdos (graduaciones, bautizos o fiestas), te sugerimos cotizar con anticipación.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botón de acción directa a WhatsApp -->
+                    <div class="pt-4 border-t border-brand-accent/15 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-2 text-xs text-brand-textMuted font-medium">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            Atención directa y personalizada por mensaje
+                        </div>
+                        <a href="https://wa.me/522471036965?text=Hola%20KINAKU%20Manualidades,%20me%20gustar%C3%ADa%20cotizar%20un%20pedido" target="_blank" class="whatsapp-btn w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full text-white text-sm font-semibold transition-all duration-300 shadow-md hover:-translate-y-0.5">
+                            <i class="ph-fill ph-whatsapp-logo text-xl"></i>
+                            Cotizar mi idea por WhatsApp
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Footer sencillo para cerrar la página -->
+        <footer class="py-8 border-t border-brand-accent/15 text-center text-xs text-brand-textMuted flex flex-col items-center gap-1.5">
+            <p>© 2026 <strong>KINAKU Manualidades</strong>. Todos los derechos reservados. Tejido con amor en México.</p>
+            <p>Desarrollado por <a href="https://danielalonsoportafoliov2.vercel.app/" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-accent hover:text-brand-accentHover transition-colors">DA System</a></p>
+        </footer>
+    </div>
+
+    <!-- Background decorative blur elements -->
+    <div class="fixed top-[-10%] right-[-5%] w-[40vw] h-[40vw] bg-brand-softPink/40 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] left-[-5%] w-[30vw] h-[30vw] bg-brand-midPink/20 rounded-full blur-[80px] -z-10 pointer-events-none"></div>
+
+</body>
+</html>

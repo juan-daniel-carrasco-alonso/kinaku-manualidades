@@ -1,0 +1,334 @@
+body {
+    background-color: #fff0f2; /* Color de fondo base muy suave */
+    color: #333333;
+    /* Radial gradient usando los tonos rosas */
+    background-image: radial-gradient(circle at 20% 30%, rgba(253, 180, 191, 0.4) 0%, transparent 50%);
+    min-height: 100vh;
+}
+
+/* Smooth transitions for hover effects */
+.glass-card {
+    background: rgba(255, 205, 212, 0.6); /* Fondo card semitransparente */
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(229, 125, 144, 0.2);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(229, 125, 144, 0.5);
+    box-shadow: 0 10px 25px rgba(229, 125, 144, 0.15);
+}
+/* Estilos para el logo personalizado */
+.logo-img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 5px rgba(229, 125, 144, 0.4));
+}
+
+/* Desplazamiento suave al dar clic en el menú */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Línea decorativa debajo de los títulos (estilo captura de Contacto) */
+.section-divider {
+    width: 60px;
+    height: 4px;
+    background-color: #e57d90;
+    border-radius: 9999px;
+}
+
+/* Círculos de iconos en la tarjeta de Contacto */
+.contact-icon-circle {
+    width: 46px;
+    height: 46px;
+    border-radius: 9999px;
+    background-color: rgba(255, 205, 212, 0.45);
+    color: #e57d90;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+/* Efecto hover al pasar el mouse sobre Dirección, Teléfono o Correo */
+.contact-info-item:hover .contact-icon-circle {
+    background-color: #e57d90;
+    color: #ffffff;
+    transform: scale(1.08);
+}
+
+/* Inputs y Textarea del formulario de contacto */
+.form-input-custom {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(229, 125, 144, 0.3);
+    border-radius: 10px;
+    color: #333333;
+    font-size: 14px;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.form-input-custom:focus {
+    outline: none;
+    background-color: #ffffff;
+    border-color: #e57d90;
+    box-shadow: 0 0 0 3px rgba(229, 125, 144, 0.15);
+}
+
+/* Efecto cristal para la barra de navegación fija */
+.glass-nav {
+    background: rgba(255, 240, 242, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(229, 125, 144, 0.25);
+    box-shadow: 0 10px 30px -10px rgba(229, 125, 144, 0.2);
+}
+
+/* Estilo de botones (píldoras) para los links del menú */
+.nav-pill {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666666;
+    transition: all 0.3s ease;
+}
+
+.nav-pill:hover {
+    color: #e57d90;
+    background-color: rgba(255, 205, 212, 0.4);
+}
+
+/* Estado activo (Botón seleccionado) */
+.nav-pill.active {
+    background: linear-gradient(135deg, #e57d90, #f1889b);
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(229, 125, 144, 0.35);
+}
+
+/* Evita que el nav fijo tape el título de las secciones al hacer clic */
+section[id] {
+    scroll-margin-top: 100px;
+}
+
+/* Animación suave para el menú desplegable en móvil */
+#mobileMenu {
+    animation: slideDownMenu 0.25s ease-out forwards;
+}
+
+@keyframes slideDownMenu {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Botón de WhatsApp integrado (Tonos Rosa) */
+.whatsapp-btn {
+    background: linear-gradient(135deg, #e57d90, #ffcdd4);
+}
+
+.whatsapp-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(229, 125, 144, 0.4);
+}
+
+/* Animación de balanceo para el ícono al hacer hover */
+@keyframes ringWiggle {
+    0% { transform: rotate(0deg); }
+    15% { transform: rotate(-15deg); }
+    30% { transform: rotate(10deg); }
+    45% { transform: rotate(-10deg); }
+    60% { transform: rotate(5deg); }
+    75% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.whatsapp-btn:hover .ph-whatsapp-logo {
+    animation: ringWiggle 0.6s ease-in-out;
+    display: inline-block; /* Necesario para que la rotación funcione bien en el ícono */
+}
+
+/* Animación para el ícono de WhatsApp en el menú de navegación */
+.nav-wa-btn:hover {
+    box-shadow: 0 4px 15px rgba(229, 125, 144, 0.4);
+}
+
+.nav-wa-btn:hover .ph-whatsapp-logo {
+    animation: ringWiggle 0.6s ease-in-out;
+    display: inline-block;
+}
+
+/* Estilos para el logo personalizado (Responsivo) */
+.logo-img {
+    width: 32px; /* Más pequeño en celular */
+    height: 32px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 5px rgba(229, 125, 144, 0.4));
+    transition: all 0.3s ease;
+}
+
+@media (min-width: 640px) {
+    .logo-img {
+        width: 45px; /* Tamaño original en tablet/PC */
+        height: 45px;
+    }
+}
+
+/* Transición suave al cambiar la imagen grande */
+#featuredImg {
+    transition: opacity 0.2s ease-in-out, transform 0.7s ease;
+}
+
+.fade-image {
+    opacity: 0.25;
+}
+
+/* Animación de entrada para las tarjetas del carrusel */
+.card-fade-in {
+    animation: fadeInCard 0.35s ease-out forwards;
+}
+
+@keyframes fadeInCard {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animación suave para la ventana Pop-up (Modal) */
+.modal-box {
+    animation: modalPopIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalPopIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Botón destacado "Ver catálogo completo" */
+.catalog-cta-btn {
+    background: linear-gradient(135deg, #e57d90, #f1889b);
+    box-shadow: 0 8px 20px -4px rgba(229, 125, 144, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.catalog-cta-btn:hover {
+    background: linear-gradient(135deg, #d8697d, #e57d90);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px -4px rgba(229, 125, 144, 0.75);
+}
+
+/* ========================================== */
+/* ESTILOS DE LA PÁGINA CATÁLOGO COMPLETO     */
+/* ========================================== */
+
+/* Botones de categoría principal en el panel izquierdo */
+.filter-cat-btn {
+    color: #555555;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid transparent;
+}
+
+.filter-cat-btn:hover {
+    background-color: rgba(255, 205, 212, 0.35);
+    color: #e57d90;
+}
+
+.filter-cat-btn.active {
+    background: linear-gradient(135deg, #e57d90, #f1889b);
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(229, 125, 144, 0.3);
+}
+
+/* Píldoras de Subcategoría y Estado (Estilo filtros Coppel) */
+.filter-subcat-pill,
+.filter-status-pill {
+    padding: 6px 13px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #555555;
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(229, 125, 144, 0.28);
+    transition: all 0.2s ease;
+}
+
+.filter-subcat-pill:hover,
+.filter-status-pill:hover {
+    border-color: #e57d90;
+    color: #e57d90;
+    background-color: #fff0f2;
+}
+
+.filter-subcat-pill.active,
+.filter-status-pill.active {
+    background-color: #e57d90;
+    color: #ffffff;
+    border-color: #e57d90;
+    font-weight: 600;
+    box-shadow: 0 3px 10px rgba(229, 125, 144, 0.3);
+}
+
+/* Tarjeta vertical de producto en la cuadrícula del catálogo */
+.catalog-product-card {
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.catalog-product-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(229, 125, 144, 0.45);
+    box-shadow: 0 14px 28px -8px rgba(229, 125, 144, 0.28);
+}
+
+/* Botones numéricos de paginación */
+.page-num-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.85);
+    color: #555555;
+    border: 1px solid rgba(229, 125, 144, 0.25);
+    transition: all 0.2s ease;
+}
+
+.page-num-btn:hover {
+    background-color: #ffcdd4;
+    color: #333333;
+}
+
+.page-num-btn.active {
+    background-color: #e57d90;
+    color: #ffffff;
+    border-color: #e57d90;
+    box-shadow: 0 4px 10px rgba(229, 125, 144, 0.35);
+}

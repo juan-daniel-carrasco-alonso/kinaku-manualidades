@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Completo | KINAKU Manualidades</title>
+    <!-- Icono de la pestaña -->
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter y Lobster -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lobster&display=swap" rel="stylesheet">
+    <!-- Estilos Personalizados -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Script Personalizado (Contiene la config de Tailwind y la base de datos de productos) -->
+    <script src="assets/js/main.js"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body class="antialiased overflow-x-hidden flex flex-col items-center min-h-screen">
+
+    <!-- Contenedor Principal -->
+    <div class="w-full max-w-[1440px] px-4 sm:px-8 lg:px-16 flex-1 flex flex-col">
+
+        <!-- Barra de Navegación Limpia para Catálogo (Sticky + Efecto Cristal) -->
+        <nav class="sticky top-4 z-50 my-4 px-3 sm:px-5 py-2.5 sm:py-3 rounded-full glass-nav flex items-center justify-between transition-all duration-300 relative">
+            
+            <!-- Logo y Título -->
+            <a href="index.html" class="flex items-center gap-2 sm:gap-3 cursor-pointer group text-brand-accent min-w-0 pr-2">
+                <img src="assets/img/logo.png" alt="Logo KINAKU Manualidades" class="logo-img shrink-0 group-hover:scale-105 transition-transform duration-300">
+                <span class="text-[16px] sm:text-2xl font-lobster tracking-wide text-brand-textMain truncate">KINAKU Manualidades</span>
+            </a>
+
+            <!-- Acciones Derecha (Botón Volver al Inicio + WhatsApp) -->
+            <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                
+                <!-- Botón Volver al Inicio -->
+                <a href="index.html" class="h-9 sm:h-10 px-3.5 sm:px-5 rounded-full bg-white/80 hover:bg-brand-accent text-brand-textMain hover:text-white border border-brand-accent/25 text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition-all duration-300 shadow-sm group">
+                    <i class="ph-bold ph-arrow-left text-sm sm:text-base text-brand-accent group-hover:text-white transition-transform duration-300 group-hover:-translate-x-1"></i>
+                    <span class="hidden sm:inline">Volver al inicio</span>
+                    <span class="sm:hidden">Inicio</span>
+                </a>
+
+                <!-- Icono WhatsApp Directo -->
+                <a href="https://wa.me/522471036965?text=Hola!%20Vi%20el%20catálogo%20de%20KINAKU%20Manualidades%20y%20me%20gustaría%20cotizar%20un%20diseño." target="_blank" aria-label="Contactar por WhatsApp" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/70 hover:bg-brand-accent flex items-center justify-center text-brand-accent hover:text-white transition-all duration-300 border border-brand-accent/20 shadow-sm nav-wa-btn">
+                    <i class="ph-fill ph-whatsapp-logo text-xl sm:text-2xl"></i>
+                </a>
+
+            </div>
+        </nav>
+
+        <!-- ========================================== -->
+        <!-- CABECERA DEL CATÁLOGO Y BUSCADOR PRINCIPAL -->
+        <!-- ========================================== -->
+        <header class="py-4 sm:py-8">
+            <!-- Ruta de navegación (Breadcrumb) -->
+            <div class="flex items-center gap-2 text-xs font-medium text-brand-textMuted mb-3">
+                <a href="index.html" class="hover:text-brand-accent transition-colors flex items-center gap-1">
+                    <i class="ph ph-house"></i> Inicio
+                </a>
+                <i class="ph-bold ph-caret-right text-[10px]"></i>
+                <span class="text-brand-accent font-semibold">Catálogo Completo</span>
+                <span id="breadcrumbCategory" class="hidden items-center gap-2">
+                    <i class="ph-bold ph-caret-right text-[10px]"></i>
+                    <span id="breadcrumbCategoryText" class="text-brand-textMain font-semibold"></span>
+                </span>
+            </div>
+
+            <!-- Barra Superior: Título + Buscador + Controles -->
+            <div class="glass-card bg-white/80 p-4 sm:p-6 rounded-3xl shadow-sm border border-white flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                
+                <div class="shrink-0">
+                    <div class="flex items-baseline gap-2.5 flex-wrap">
+                        <h1 id="catalogMainTitle" class="text-xl sm:text-3xl font-bold text-brand-textMain">Todos los Productos</h1>
+                        <span id="catalogCountText" class="text-xs font-semibold text-brand-accent bg-brand-card/60 border border-brand-accent/20 px-3 py-0.5 rounded-full">
+                            0 resultados
+                        </span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-brand-textMuted mt-0.5 hidden sm:block">
+                        Explora nuestras creaciones o busca por nombre, categoría o número de modelo.
+                    </p>
+                </div>
+
+                <!-- Buscador Resaltado + Fila de Ordenar y Filtrar -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-3 w-full lg:w-auto flex-1 lg:max-w-3xl">
+                    
+                    <!-- Input Buscador Destacado (Más largo en PC y con borde/icono resaltado) -->
+                    <div class="relative flex-1 sm:w-80 lg:w-[420px] xl:w-[480px] group">
+                        <!-- Icono de lupa dentro de círculo rosa para atraer la mirada -->
+                        <span class="w-8 h-8 rounded-full bg-gradient-to-tr from-brand-accent to-brand-accentHover text-white flex items-center justify-center absolute left-2 top-1/2 -translate-y-1/2 shadow-sm pointer-events-none transition-transform duration-300 group-focus-within:scale-105">
+                            <i class="ph-bold ph-magnifying-glass text-sm"></i>
+                        </span>
+                        
+                        <input 
+                            type="text" 
+                            id="catalogSearchInput" 
+                            placeholder="Buscar osito, flores, #5, fieltro..." 
+                            class="w-full pl-12 pr-9 py-2.5 sm:py-3 bg-white border-2 border-brand-accent/70 hover:border-brand-accent rounded-full text-xs sm:text-sm font-medium text-brand-textMain placeholder:text-brand-textMuted/75 focus:outline-none focus:border-brand-accent focus:ring-4 focus:ring-brand-accent/20 transition-all shadow-md shadow-brand-accent/15"
+                        >
+                        
+                        <button id="clearSearchBtn" aria-label="Limpiar búsqueda" class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-brand-textMuted hover:text-brand-accent transition-colors">
+                            <i class="ph-fill ph-x-circle text-lg"></i>
+                        </button>
+                    </div>
+
+                    <!-- Barra estilo Coppel Móvil: Ordenar a la izquierda + Botón Filtrar (0) a la derecha -->
+                    <div class="flex items-center justify-between sm:justify-end gap-2 shrink-0">
+                        <!-- Ordenar por -->
+                        <div class="flex-1 sm:flex-initial flex items-center gap-1.5 bg-white border border-brand-accent/35 rounded-full px-4 py-2.5 text-xs sm:text-sm shadow-sm">
+                            <span class="text-brand-textMuted font-medium hidden sm:inline">Ordenar:</span>
+                            <select id="catalogSortSelect" class="w-full bg-transparent font-semibold text-brand-textMain focus:outline-none cursor-pointer">
+                                <option value="recientes">Más recientes</option>
+                                <option value="antiguos">Más antiguos</option>
+                                <option value="disponibles">Disponibles primero</option>
+                                <option value="az">Nombre (A - Z)</option>
+                            </select>
+                        </div>
+
+                        <!-- Botón "Filtrar (0)" exclusivo para Móvil/Tablet -->
+                        <button id="openMobileFiltersBtn" type="button" class="lg:hidden flex items-center justify-center gap-1.5 bg-white hover:bg-brand-card/40 text-brand-accent border-2 border-brand-accent/50 rounded-full px-4 py-2 text-xs font-bold shadow-sm transition-all shrink-0">
+                            <i class="ph-fill ph-funnel text-sm"></i>
+                            <span id="mobileFilterBtnText">Filtrar (0)</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <!-- ========================================== -->
+        <!-- CONTENIDO: FILTROS (IZQ) + CUADRÍCULA (DER)-->
+        <!-- ========================================== -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-16 flex-1 items-start">
+
+            <!-- Fondo oscuro cuando se abren los filtros en celular -->
+            <div id="mobileFilterBackdrop" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[80] hidden lg:hidden"></div>
+
+            <!-- COLUMNA IZQUIERDA: Oculta en móvil (Modal desplegable) y Fija en PC -->
+            <aside id="catalogFilterSidebar" class="hidden lg:block fixed lg:static inset-x-4 top-20 bottom-6 lg:inset-auto z-[90] lg:z-auto lg:col-span-3 w-auto lg:w-full glass-card bg-white/95 lg:bg-white/80 p-5 sm:p-6 rounded-3xl shadow-2xl lg:shadow-md border border-white lg:sticky lg:top-24 overflow-y-auto flex-col justify-between">
+                
+                <div>
+                    <!-- Cabecera del panel de filtros -->
+                    <div class="flex items-center justify-between pb-4 mb-4 border-b border-brand-accent/15">
+                        <h2 class="font-bold text-brand-textMain text-base flex items-center gap-2">
+                            <i class="ph-fill ph-funnel text-brand-accent text-lg"></i>
+                            Filtrar por
+                        </h2>
+                        <div class="flex items-center gap-3">
+                            <button id="resetFiltersBtn" type="button" class="text-xs font-semibold text-brand-accent hover:underline">
+                                Limpiar todo
+                            </button>
+                            <!-- Botón cerrar (X) solo visible en móvil -->
+                            <button id="closeMobileFiltersBtn" type="button" aria-label="Cerrar filtros" class="lg:hidden w-8 h-8 rounded-full bg-brand-card/50 text-brand-textMain hover:bg-brand-accent hover:text-white flex items-center justify-center transition-colors">
+                                <i class="ph-bold ph-x text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Acordeón 1: Categoría Principal -->
+                    <div class="filter-section border-b border-brand-accent/15 pb-4 mb-4">
+                        <button type="button" class="filter-accordion-btn w-full flex items-center justify-between py-1 text-left font-semibold text-sm text-brand-textMain hover:text-brand-accent transition-colors" data-target="filterCatContent">
+                            <span>Categorías</span>
+                            <i class="ph-bold ph-caret-up transition-transform duration-300"></i>
+                        </button>
+                        
+                        <div id="filterCatContent" class="mt-3 space-y-1.5">
+                            <button type="button" data-category="Todas" class="filter-cat-btn active w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all">
+                                <span>Todas las categorías</span>
+                                <span id="count-cat-Todas" class="text-[11px] opacity-80">0</span>
+                            </button>
+                            <button type="button" data-category="Tejidos" class="filter-cat-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all">
+                                <span class="flex items-center gap-2"><i class="ph ph-yarn"></i> Tejidos</span>
+                                <span id="count-cat-Tejidos" class="text-[11px] opacity-80">0</span>
+                            </button>
+                            <button type="button" data-category="Manualidades" class="filter-cat-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all">
+                                <span class="flex items-center gap-2"><i class="ph ph-scissors"></i> Manualidades</span>
+                                <span id="count-cat-Manualidades" class="text-[11px] opacity-80">0</span>
+                            </button>
+                            <button type="button" data-category="Trabajos Escolares" class="filter-cat-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all">
+                                <span class="flex items-center gap-2"><i class="ph ph-backpack"></i> Trabajos Escolares</span>
+                                <span id="count-cat-Trabajos Escolares" class="text-[11px] opacity-80">0</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Acordeón 2: Subcategorías de Tejidos -->
+                    <div id="subcatAccordionWrapper" class="filter-section border-b border-brand-accent/15 pb-4 mb-4">
+                        <button type="button" class="filter-accordion-btn w-full flex items-center justify-between py-1 text-left font-semibold text-sm text-brand-textMain hover:text-brand-accent transition-colors" data-target="filterSubcatContent">
+                            <span>Subcategorías (Tejidos)</span>
+                            <i class="ph-bold ph-caret-up transition-transform duration-300"></i>
+                        </button>
+                        
+                        <div id="filterSubcatContent" class="mt-3 flex flex-wrap gap-2">
+                            <button type="button" data-subcategory="Todas" class="filter-subcat-pill active">
+                                Todas
+                            </button>
+                            <button type="button" data-subcategory="Animales" class="filter-subcat-pill">
+                                Animales
+                            </button>
+                            <button type="button" data-subcategory="Personajes" class="filter-subcat-pill">
+                                Personajes
+                            </button>
+                            <button type="button" data-subcategory="Personalizados" class="filter-subcat-pill">
+                                Personalizados
+                            </button>
+                            <button type="button" data-subcategory="Varios" class="filter-subcat-pill">
+                                Varios
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Acordeón 3: Estado / Disponibilidad -->
+                    <div class="filter-section">
+                        <button type="button" class="filter-accordion-btn w-full flex items-center justify-between py-1 text-left font-semibold text-sm text-brand-textMain hover:text-brand-accent transition-colors" data-target="filterStatusContent">
+                            <span>Disponibilidad</span>
+                            <i class="ph-bold ph-caret-up transition-transform duration-300"></i>
+                        </button>
+                        
+                        <div id="filterStatusContent" class="mt-3 flex flex-wrap gap-2">
+                            <button type="button" data-status="Todos" class="filter-status-pill active">
+                                Todos
+                            </button>
+                            <button type="button" data-status="Disponible" class="filter-status-pill flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-brand-accent"></span> En Stock
+                            </button>
+                            <button type="button" data-status="Entregado" class="filter-status-pill flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Entregados
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón inferior "Ver resultados" exclusivo para cerrar el panel en celular -->
+                <div class="mt-6 pt-4 border-t border-brand-accent/15 lg:hidden">
+                    <button id="applyMobileFiltersBtn" type="button" class="w-full py-3 rounded-full bg-brand-accent hover:bg-brand-accentHover text-white text-sm font-semibold shadow-md transition-all">
+                        Ver resultados
+                    </button>
+                </div>
+
+            </aside>
+
+            <!-- COLUMNA DERECHA: GRID DE PRODUCTOS Y PAGINACIÓN (9 Columnas en PC) -->
+            <section class="lg:col-span-9 w-full flex flex-col justify-between">
+                
+                <!-- Cuadrícula de Productos (2 columnas en móvil igual a Coppel, 3 en tablet, 4 en PC) -->
+                <div id="catalogGridContainer" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5">
+                    <!-- JavaScript inyecta aquí hasta 16 tarjetas por página -->
+                </div>
+
+                <!-- Estado vacío cuando no hay coincidencias en la búsqueda -->
+                <div id="catalogEmptyState" class="hidden glass-card bg-white/70 rounded-3xl p-12 text-center my-4">
+                    <div class="w-16 h-16 rounded-full bg-brand-card/60 text-brand-accent flex items-center justify-center text-3xl mx-auto mb-4">
+                        <i class="ph ph-magnifying-glass"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-brand-textMain mb-2">No encontramos modelos con ese filtro</h3>
+                    <p class="text-sm text-brand-textMuted max-w-md mx-auto mb-6">
+                        Intenta con otra palabra clave o limpia los filtros activos para ver todo nuestro catálogo.
+                    </p>
+                    <button id="emptyResetBtn" class="bg-brand-accent hover:bg-brand-accentHover text-white font-semibold px-6 py-2.5 rounded-full text-sm transition-colors shadow-md">
+                        Mostrar todos los productos
+                    </button>
+                </div>
+
+                <!-- Controles de Paginación (Optimizado para no desbordar en móvil) -->
+                <div id="catalogPagination" class="mt-10 pt-6 border-t border-brand-accent/15 flex flex-col sm:flex-row items-center justify-between gap-4 w-full">
+                    <span id="paginationInfoText" class="text-xs sm:text-sm text-brand-textMuted font-medium text-center sm:text-left">
+                        Mostrando 1 - 16 de 0 productos
+                    </span>
+
+                    <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 max-w-full">
+                        <button id="prevPageBtn" class="px-3.5 sm:px-4 py-2 rounded-full bg-white border border-brand-accent/25 text-brand-textMain hover:bg-brand-card text-xs sm:text-sm font-semibold flex items-center gap-1 transition-colors disabled:opacity-40 disabled:pointer-events-none shadow-sm">
+                            <i class="ph-bold ph-caret-left"></i> <span>Anterior</span>
+                        </button>
+
+                        <!-- Números de página generados dinámicamente -->
+                        <div id="pageNumbersContainer" class="flex flex-wrap items-center justify-center gap-1 sm:gap-1.5"></div>
+
+                        <button id="nextPageBtn" class="px-3.5 sm:px-5 py-2 rounded-full bg-brand-accent hover:bg-brand-accentHover text-white text-xs sm:text-sm font-semibold flex items-center gap-1 transition-colors disabled:opacity-40 disabled:pointer-events-none shadow-md shadow-brand-accent/25">
+                            <span>Siguiente</span><span class="hidden sm:inline"> página</span> <i class="ph-bold ph-caret-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- VENTANA POP-UP (IDÉNTICA A LA PRINCIPAL)   -->
+        <!-- ========================================== -->
+        <div id="productModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6 bg-black/50 backdrop-blur-sm">
+            <div class="modal-box glass-card bg-white/95 rounded-[1.75rem] sm:rounded-[2rem] max-w-2xl w-full max-h-[90vh] overflow-y-auto sm:overflow-hidden shadow-2xl border border-white relative mx-auto">
+                
+                <!-- Botón Cerrar (X) -->
+                <button id="closeModalBtn" aria-label="Cerrar ventana" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-brand-accent text-brand-textMain hover:text-white flex items-center justify-center transition-colors shadow-md">
+                    <i class="ph-bold ph-x text-lg"></i>
+                </button>
+
+                <div class="grid grid-cols-1 sm:grid-cols-12">
+                    <!-- Imagen del Producto en el Pop-up (Altura controlada en móvil para que quede bien centrada) -->
+                    <div class="sm:col-span-6 bg-brand-dark/60 h-64 sm:h-full sm:aspect-auto relative overflow-hidden group">
+                        <img id="modalImg" src="" alt="" class="w-full h-full object-cover cursor-zoom-in transition-transform duration-500 group-hover:scale-105">
+                        
+                        <!-- Etiqueta Izquierda: Número de Modelo -->
+                        <span id="modalIdBadge" class="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm text-brand-textMain text-xs font-bold px-3 py-1 rounded-full shadow">
+                            #1
+                        </span>
+
+                        <!-- Botón Derecha: Zoom para ver imagen completa -->
+                        <button id="zoomImgBtn" type="button" aria-label="Ver imagen en tamaño completo" title="Ver tamaño completo" class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-white/90 hover:bg-brand-accent text-brand-textMain hover:text-white backdrop-blur-sm flex items-center justify-center shadow transition-all duration-200 hover:scale-110">
+                            <i class="ph-bold ph-magnifying-glass-plus text-sm"></i>
+                        </button>
+                    </div>
+
+                    <!-- Información del Producto en el Pop-up -->
+                    <div class="sm:col-span-6 p-6 sm:p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="flex flex-wrap items-center gap-2 mb-3 pr-8">
+                                <span id="modalCategory" class="inline-block bg-brand-card/70 text-brand-accent text-xs font-semibold px-3 py-1 rounded-full">
+                                    Categoría
+                                </span>
+                                <span id="modalStatusBadge" class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full">
+                                    Estado
+                                </span>
+                            </div>
+
+                            <h3 id="modalTitle" class="text-2xl font-bold text-brand-textMain mb-3 leading-snug">
+                                Nombre del Producto
+                            </h3>
+                            <p id="modalDesc" class="text-sm text-brand-textMuted leading-relaxed mb-6">
+                                Descripción completa del producto seleccionado.
+                            </p>
+                        </div>
+
+                        <div class="pt-4 border-t border-brand-accent/15 flex flex-col gap-2.5">
+                            <a id="modalWaBtn" href="#" target="_blank" class="whatsapp-btn flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl text-white text-sm font-semibold transition-all duration-300 shadow-md">
+                                <i class="ph-fill ph-whatsapp-logo text-xl"></i>
+                                <span id="modalWaBtnText">Me interesa este modelo</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- VISOR DE IMAGEN EN TAMAÑO COMPLETO (ZOOM)  -->
+        <!-- ========================================== -->
+        <div id="imageLightbox" class="fixed inset-0 z-[120] hidden items-center justify-center p-3 sm:p-8 bg-black/85 backdrop-blur-md cursor-zoom-out">
+            <!-- Botón Cerrar Zoom -->
+            <button id="closeLightboxBtn" type="button" aria-label="Cerrar imagen completa" class="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 w-11 h-11 rounded-full bg-white/90 hover:bg-brand-accent text-brand-textMain hover:text-white flex items-center justify-center transition-all shadow-lg">
+                <i class="ph-bold ph-x text-xl"></i>
+            </button>
+
+            <!-- Imagen Completa Sin Recortes -->
+            <img id="lightboxImg" src="" alt="" class="max-w-full max-h-[90vh] w-auto h-auto object-contain rounded-2xl shadow-2xl border-2 border-white/20 modal-box cursor-default">
+        </div>
+
+        <!-- Footer -->
+        <footer class="py-8 border-t border-brand-accent/15 text-center text-xs text-brand-textMuted flex flex-col items-center gap-1.5 mt-auto">
+            <p>© 2026 <strong>KINAKU Manualidades</strong>. Todos los derechos reservados. Tejido con amor en México.</p>
+            <p>Desarrollado por <a href="https://danielalonsoportafoliov2.vercel.app/" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-accent hover:text-brand-accentHover transition-colors">DA System</a></p>
+        </footer>
+
+    </div>
+
+    <!-- Elementos decorativos de fondo -->
+    <div class="fixed top-[-10%] right-[-5%] w-[40vw] h-[40vw] bg-brand-softPink/40 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] left-[-5%] w-[30vw] h-[30vw] bg-brand-midPink/20 rounded-full blur-[80px] -z-10 pointer-events-none"></div>
+
+</body>
+</html>
